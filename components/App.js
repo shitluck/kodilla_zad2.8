@@ -20,18 +20,18 @@ App = React.createClass({
         }.bind(this));
     },
 
-    getGif: function(searchingText, callback) {  // 1.
+    getGif: function(searchingText, callback) {
         var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;  // 2.
-        var xhr = new XMLHttpRequest();  // 3.
+        var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.onload = function() {
             if (xhr.status === 200) {
-               var data = JSON.parse(xhr.responseText).data; // 4.
-                var gif = {  // 5.
+               var data = JSON.parse(xhr.responseText).data;
+                var gif = {
                     url: data.fixed_width_downsampled_url,
                     sourceUrl: data.url
                 };
-                callback(gif);  // 6.
+                callback(gif);
             }
         };
         xhr.send();
