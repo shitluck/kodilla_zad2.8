@@ -1,3 +1,6 @@
+var GIPHY_API_URL = 'https://api.giphy.com';
+var GIPHY_PUB_KEY = '9af6d92a7b0d48a4812c800105edda24';
+
 App = React.createClass({
     getInitialState() {
         return {
@@ -20,18 +23,18 @@ App = React.createClass({
         }.bind(this));
     },
 
-    getGif: function(searchingText, callback) {  // 1.
-        var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;  // 2.
-        var xhr = new XMLHttpRequest();  // 3.
+    getGif: function(searchingText, callback) {
+        var url = GIPHY_API_URL + '/v1/gifs/random?api_key=' + GIPHY_PUB_KEY + '&tag=' + searchingText;
+        var xhr = new XMLHttpRequest();
         xhr.open('GET', url);
         xhr.onload = function() {
             if (xhr.status === 200) {
-               var data = JSON.parse(xhr.responseText).data; // 4.
-                var gif = {  // 5.
+               var data = JSON.parse(xhr.responseText).data;
+                var gif = {
                     url: data.fixed_width_downsampled_url,
                     sourceUrl: data.url
                 };
-                callback(gif);  // 6.
+                callback(gif);
             }
         };
         xhr.send();
